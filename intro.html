@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+
+@CHARSET "UTF-8";
+
+/********************************************************/
+/***** START : 	width(default) 		desktop default	*****/
+
+/** 재정의 필요 */
+div.div_in300{width:300px;display:inline-block;text-align:center;}
+
+/** AREA - ATTR */
+.relative{position: relative !important;}
+.right{float:right !important;;}
+.left{float:left !important;;}
+.hidden{display: none !important;}
+.block{display: block !important;}
+.text_center{text-align: center !important;}
+.text_left{text-align: left !important;}
+.hover_point_opacity{opacity: 0.7;cursor: pointer;}
+
+/** AREA - GRID */
+.row:after{content:" "; display:block; clear:both;}
+.row_target_parent {}
+
+.col_1 {width:8.33333333%;float: left;}
+.col_2 {width:16.66666667%;float: left;}
+.col_3 {width:25%;float: left;}
+.col_4 {width:33.33333333%;float: left;}
+.col_5 {width:41.66666667%;float: left;}
+.col_6 {width:50%;float: left;}
+.col_7 {width:58.33333333%;float: left;}
+.col_8 {width:66.66666667%;float: left;}
+.col_9 {width:75%;float: left;}
+.col_10 {width:83.33333333%;float: left;}
+.col_11 {width:91.66666667%;float: left;}
+.col_12 {width:100%;float: left;}
+.col_1140_1 {}
+.col_768_1 {}
+.col_480_1 {}
+
+/** AREA - TABLE */
+.table{display:table;width:100%;height:100%;}
+.table .table_cell{display:table-cell;width:100%;vertical-align:middle;}
+
+
+/** AREA - MARGIN */
+.mt0{margin-top:0px !important;}
+.mt5{margin-top:5px !important;}
+.mt10{margin-top:10px !important;}
+.mt25{margin-top:25px !important;}
+.mt37{margin-top:37px !important;}
+.mb0{margin-bottom:0px !important;}
+.mb24{margin-bottom:24px !important;}
+.ml20{margin-left: 20px !important;}
+.ml25{margin-left: 25px !important;}
+.mr20{margin-right: 20px !important;}
+
+/** AREA - HIDDEN */
+.in1140{display: none !important;}
+.in768{display: none !important;} 
+.in480{display: none !important;}
+.out1140{display: inherit !important;}
+.out768{display: inherit !important;}
+.out480{display: inherit !important;}
+
+/** BOX - BORDER */
+.b_no{border:none !important;}
+.bt_no{border-top:none !important;}
+
+/** LAYOUT */
+.container_contents {text-align: center;max-width: 1140px;margin: 0 auto;position:relative;}
+.container_contents_max {text-align: center;max-width: 1140px;margin: 0 auto;position:relative;}
+.container_max {text-align: center;width:100%;margin: 0 auto;position:relative;}
+
+/** COMP - BACKGROUND */
+.bg_grad {position: absolute;top: 0;right: 0;bottom: 0;left: 0;background-image: -webkit-linear-gradient(top,rgba(0,0,0,.4),transparent 25%,transparent 75%,rgba(0,0,0,.4));background-image: linear-gradient(180deg,rgba(0,0,0,.4) 0,transparent 25%,transparent 75%,rgba(0,0,0,.4));opacity: 1;-webkit-transition: all .3s ease-in-out;transition: all .3s ease-in-out;}
+.bg_grad:hover {opacity:1;}
+.bg_dark {position: absolute;top: 0;right: 0;bottom: 0;left: 0;opacity: 0.3;background-image: -webkit-linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4));background-image: linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4),rgba(0,0,0,.4),rgba(0,0,0,.4));opacity: 1;-webkit-transition: all .3s ease-in-out;transition: all .3s ease-in-out;}
+
+/** COMP - BUTTON 
+	a : 링크 목적
+	button : 기능
+	input : form 전송
+*/
+
+
+/** COMP - LABEL */
+.label_title {text-align: center;display: block;width: 45px;height: 3px;background-color: #004f9f;margin: 0 auto;}
+.label_title_f {text-align: center;display: block;width: 45px;height: 3px;background-color: #fff;margin: 0 auto;}
+
+/** FUNC */
+.hover_in{position: absolute !important;top:0;bottom:0;width:100%;opacity:0;z-index: 1;}
+.hover_out{position: relative !important;opacity:1;z-index:1;}
+.trans_ease{-webkit-transition: all 0.2s ease;-moz-transition: all 0.2s ease;-o-transition: all 0.2s ease;transition: all 0.2s ease;}
+.trans_ease_3{-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-o-transition: all 0.3s ease;transition: all 0.3s ease;}
+.animated {animation-duration:1s; animation-fill-mode:both;-webkit-animation-duration:1s; -webkit-animation-fill-mode:both;}
+.fadeInUp {animation-name:fadeInUp;-webkit-animation-name:fadeInUp;}
+.pointer_none {pointer-events: none;}
+
+/***** END : 	width(default) 		desktop default	*****/
+/********************************************************/
+
+
+
+/********************************************************/
+/***** START : 	width(1139px) 		moblie ~1139	*****/
+@media screen and (max-width: 1139px) {
+	.in1140{display: inherit;}
+	.out1140{display: none !important;}
+	.out768{display: inherit !important;}
+	.out480{display: inherit !important;}
+	
+	.container_contents {width:96%;}
+	.container_contents_max {width:100%;}
+	
+	a.btn_submit1{width:98%;border-radius:0;}
+	div.div_in300{width:98%;}
+}
+
+
+/***** END : 	width(1139px) 		moblie ~1139	*****/
+/********************************************************/
+	.col_1140_1 {width:8.33333333%;float: left;}
+	.col_1140_2 {width:16.66666667%;float: left;}
+	.col_1140_3 {width:25%;float: left;}
+	.col_1140_4 {width:33.33333333%;float: left;}
+	.col_1140_5 {width:41.66666667%;float: left;}
+	.col_1140_6 {width:50%;float: left;}
+	.col_1140_7 {width:58.33333333%;float: left;}
+	.col_1140_8 {width:66.66666667%;float: left;}
+	.col_1140_9 {width:75%;float: left;}
+	.col_1140_10 {width:83.33333333%;float: left;}
+	.col_1140_11 {width:91.66666667%;float: left;}
+	.col_1140_12 {width:100%;float: left;}
+
+/********************************************************/
+/***** START : 	width(767px) 		moblie ~767		*****/
+@media screen and (max-width: 767px) {
+	.in768{display: inherit !important;}  
+	.out1140{display: none !important;}
+	.out768{display: none !important;}
+	.out480{display: inherit !important;}
+	
+	.col_768_1 {width:8.33333333%;float: left;}
+	.col_768_2 {width:16.66666667%;float: left;}
+	.col_768_3 {width:25%;float: left;}
+	.col_768_4 {width:33.33333333%;float: left;}
+	.col_768_5 {width:41.66666667%;float: left;}
+	.col_768_6 {width:50%;float: left;}
+	.col_768_7 {width:58.33333333%;float: left;}
+	.col_768_8 {width:66.66666667%;float: left;}
+	.col_768_9 {width:75%;float: left;}
+	.col_768_10 {width:83.33333333%;float: left;}
+	.col_768_11 {width:91.66666667%;float: left;}
+	.col_768_12 {width:100%;float: left;}
+	
+	
+}
+/***** END : 	width(767px) 		moblie ~767		*****/
+/********************************************************/
+
+/********************************************************/
+/***** START : 	width(480px) 		moblie ~480		*****/
+@media screen and (max-width: 479px) {
+	.in480{display: inherit;}
+	.out1140{display: none !important;}
+	.out768{display: none !important;}
+	.out480{display: none !important;}
+	
+	.col_480_1 {width:8.33333333%;float: left;}
+	.col_480_2 {width:16.66666667%;float: left;}
+	.col_480_3 {width:25%;float: left;}
+	.col_480_4 {width:33.33333333%;float: left;}
+	.col_480_5 {width:41.66666667%;float: left;}
+	.col_480_6 {width:50%;float: left;}
+	.col_480_7 {width:58.33333333%;float: left;}
+	.col_480_8 {width:66.66666667%;float: left;}
+	.col_480_9 {width:75%;float: left;}
+	.col_480_10 {width:83.33333333%;float: left;}
+	.col_480_11 {width:91.66666667%;float: left;}
+	.col_480_12 {width:100%;float: left;}
+	
+	
+}
+/***** END : 	width(767px) 		moblie ~767		*****/
+/********************************************************/
+
+
+
+
+
+.intro_view {height:385px;color:#fff;font-size: 20px;} 
+.intro_view .text_title {padding-top: 40px;} 
+.intro_view .text_desc {}
+.intro_view .bg_intro_view{background-image:url('./image/bg_company_light.jpg');background-size: cover;background-position:center center;background-repeat: no-repeat;}
+
+.icon_text {padding: 20px;}
+.icon_text .circle_icon {
+	position:relative;
+    font-size: 65px;
+    font-weight: 700;
+    width: 200px;
+    color: #000;
+    height: 200px;
+    background: #fff;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border:1px solid #c7c7c7;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 160px;
+}
+.icon_text .circle_icon:hover {background: #004f9f;color: #fff;}
+.icon_text .circle_icon p {font-size: 18px;position: absolute;bottom: -18px;width: 100%;font-weight: 500;}
+.icon_text .icon_title {font-size: 22px;font-weight: 500;color: #000;padding-top: 10px;border-bottom: 1px solid #ddd;padding-bottom: 10px;}
+.icon_text .icon_desc {padding-top: 20px;}
+.icon_text .icon_desc p {font-size: 15px;font-weight: 400;}
+
+.gnb_ul>li>a:not(.link--faded)::before {content: '';position: absolute;top: 100%;left: 50%;width: 30px;height: 2px;margin: 5px 0 0 -15px;background: #fff;-webkit-transition: -webkit-transform 0.3s;transition: transform 0.3s;-webkit-transform: scale3d(0, 1, 1);transform: scale3d(0, 1, 1);}
+.gnb_ul>li>a:hover:before {-webkit-transform: scale3d(1, 1, 1);transform: scale3d(1, 1, 1);}
+</style>
+</head>
+<body>
+	<div id="wrap">
+		<main id="main">
+			<div class="wrap_contents">
+				<section class="contents">
+					<div style="text-align: center">
+						<div class="action_up">
+							<div class="label_title"></div>
+							<h3 class="contents_title">지원자 김동욱 입니다.</h3>
+						</div>
+						<p class="contents_info action_up">
+							인공지능에 관심이 많고 배워보고싶어 지원 하게 됬습니다.<br>
+							부족하지만 열심히 하겠습니다.<br>
+							이번 스터디를 하면서 아래 4가지를 실천 할 것을 목표로 하고 있습니다.  
+						</p>
+					</div>
+					<div class="wrap_contents_sub">
+						<section class="contents_sub container_contents_max intro_who">
+							<div class="row">
+								<div class="col_3 col_768_6 col_480_12">
+									<div class="icon_text">
+										<div class="circle_icon">
+											&nbsp;<i class="fa fa-leaf" aria-hidden="true"></i>&nbsp;
+											<p>TRUST</p>
+										</div>
+										<div class="icon_title">신뢰</div>
+										<div class="icon_desc">
+											<p>스터디를 하면<br>팀원을 서로서로를 신뢰하겠습니다.</p>
+										</div>
+									</div>
+								</div>
+								<div class="col_3 col_768_6 col_480_12">
+									<div class="icon_text">
+										<div class="circle_icon">
+											&nbsp;<i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;
+											<p>RESPONSIBLE</p>
+										</div>
+										<div class="icon_title">책임감</div>
+										<div class="icon_desc">
+											<p>맡을일을 <br>책임을 다해 하겠습니다.</p>
+										</div>
+			
+									</div>
+								</div>
+								<div class="col_3 col_768_6 col_480_12">
+									<div class="icon_text">
+										<div class="circle_icon">
+											&nbsp;<i class="fa fa-superpowers" aria-hidden="true"></i>&nbsp;
+											<p>PASSION</p>
+										</div>
+										<div class="icon_title">열정</div>
+										<div class="icon_desc">
+											<p>새로운 기술에<br> 열정을 가지고 하겠습니다.</p>
+										</div>
+									</div>
+								</div>
+								<div class="col_3 col_768_6 col_480_12">
+									<div class="icon_text">
+										<div class="circle_icon">
+											&nbsp;<i class="fa fa-american-sign-language-interpreting" aria-hidden="true"></i>&nbsp;
+											<p>OPEN</p>
+										</div>
+										<div class="icon_title">오픈지식</div>
+										<div class="icon_desc">
+											<p>서로 서로 지식 공율로<br> 더 발전해 나갈것입니다.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="contents_sub container_max intro_view">
+							<div class="thumb_text">
+								<div class="wrap_bg">
+									<div class="bg_scale bg_intro_view" style="height: 385px; ">
+										<p class="text_title"> [ 소개   ] </p>
+										<p class="text_desc">
+											안녕하세요 반갑습니다  회사원 김동욱 입니다. <br>
+											여러분야에서 일하시는분들고 함게 지식을 공유하고 공부를 해보고 싶어서 <br>
+											지원 했습니다. 사용가는 기술을 java, javascript 등이있습니다. <br>
+											열심히 배우고 공부하여 지식공유 하겠습니다. 부족하지만 잘 부탁 드립니다.
+										</p>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</main>
+	</div>
+</body>
+</html>
