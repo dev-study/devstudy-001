@@ -1,1 +1,1 @@
-<a href="https://guitarhero02.github.io/">소개페이지 바로가기</a>
+[소개페이지](https://guitarhero02.github.io/)로 바로가기
