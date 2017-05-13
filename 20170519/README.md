@@ -26,7 +26,7 @@
 - 미니프로젝트 산출물 등록
   - Github Rep. : https://goo.gl/55nuwr
   - 등록형식 : 본인이름폴더/README.md
-    - 예) dev-study/devstudy-2017-first/20170519/mission/이강훈/README.md
+    - 예) dev-study/devstudy-2017-first/20170519/mission/이강훈_프로젝트명/README.md
 
 ## 2주차 스터디 주제
 
