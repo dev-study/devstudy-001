@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>가위바위보 게임</title>
+    <style>
+      @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+      body {
+        font-size: 40px;
+        font-family: 'Hanna';
+      }
+    </style>
+  </head>
+  <body onload="change()" bgcolor="#9999ff">
+    <center>
+      안내면 진다~ 가위바위보!
+      <br /><br />
+      <div id="com">
+        <img id="com_img" src="" width="100" height="100"/><br />
+        com
+      </div>
+      <div id="me">
+        <img onclick="rsp(0)" src="s.png" caption="가위" width="100" height="100"/>
+        <img onclick="rsp(1)" src="r.png" caption="바위" width="100" height="100"/>
+        <img onclick="rsp(2)" src="p.png" caption="보" width="100" height="100"/><br />
+        user
+      </div>
+      <br /><br />
+      <div id="result">
+      </div>
+      <div id="score">
+        남은기회 : 5번 현재점수 : 0점
+      </div>
+      <script language="javascript" type="text/javascript" src="./rsp.js"></script>
+    </center>
+  </body>
+</html>
