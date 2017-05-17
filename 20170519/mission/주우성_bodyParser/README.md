@@ -1,6 +1,10 @@
 # Expressjs/body-parser.js 실습해보기
 
-API : https://github.com/expressjs/body-parser
+- API : https://github.com/expressjs/body-parser
+- git-app1 : https://github.com/woosungchu/ex-bp-app1
+- git-app2 : https://github.com/woosungchu/ex-bp-app2
+- host-app1 : https://ex-bp-app1.herokuapp.com/
+- hot-app2 : https://ex-bp-app2.herokuapp.com/
 
 #### 지원
 - JSON body
@@ -14,14 +18,17 @@ API : https://github.com/expressjs/body-parser
 #### Setup
 ```
 npm init
-npm install --save-dev express
-npm install --save-dev body-parser
+npm install --save express
+npm install --save body-parser
 ```
 
 #### TEST
 ```
+https://ex-bp-app1.herokuapp.com/api/users/
+https://ex-bp-app2.herokuapp.com/api/users/
 http://localhost:8080/login/
 http://localhost:8080/api/users/
+
 ```
 
 1. Express route-specific ( app.js )

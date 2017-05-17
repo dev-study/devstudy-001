@@ -4,7 +4,7 @@
   "description": "express/body-parser practice",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "start": "node app.js"
   },
   "keywords": [
     "node",
@@ -13,7 +13,7 @@
   ],
   "author": "woosungchu",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2"
   }
