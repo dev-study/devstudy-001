@@ -11,13 +11,17 @@ API : https://github.com/expressjs/body-parser
 > Multipart는 지원하지 않음
 
 
-#### Practice
-
-setup
+#### Setup
 ```
 npm init
 npm install --save-dev express
 npm install --save-dev body-parser
+```
+
+#### TEST
+```
+http://localhost:8080/login/
+http://localhost:8080/api/users/
 ```
 
 1. Express route-specific ( app.js )
