@@ -20,7 +20,7 @@ function rsp(choice){                       //사용자 입력있으면 실행�
   var result = document.getElementById('result');
   var user_score = document.getElementById('score');
 
-  if(game>0){                               //게임 횟수 5번 제한
+  if(game>=0){                               //게임 횟수 5번 제한
     if(choice == com){
       com_img.src = com_choice[com];
       result.innerHTML = "비겼습니다.";
@@ -42,7 +42,7 @@ function rsp(choice){                       //사용자 입력있으면 실행�
     }
   }
   else {
-    user_score.innerHTML = "남은기회 : "+game+"번 현재점수 : "+score+"점";
+    user_score.innerHTML = "남은기회 : 없음" 현재점수 : "+score+"점";
     alert("당신의 점수는 "+score+"입니다!!");
     window.close();
   }
