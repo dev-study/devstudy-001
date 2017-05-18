@@ -42,7 +42,7 @@ function rsp(choice){                       //사용자 입력있으면 실행�
     }
   }
   else {
-    user_score.innerHTML = "남은기회 : 없음" 현재점수 : "+score+"점";
+    user_score.innerHTML = "남은기회 : 없음 현재점수 : "+score+"점";
     alert("당신의 점수는 "+score+"입니다!!");
     window.close();
   }
