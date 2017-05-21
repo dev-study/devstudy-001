@@ -49,3 +49,15 @@ __module.exports__
   
   ~~~~
   
+  3. NPM
+  
+  [1] www.npmjs.com  : public modules
+  
+  [2] usage :
+  
+		$ npm init
+		$ npm install
+		$ npm update
+		$ npm prune
+		
+  
