@@ -51,7 +51,7 @@ __module.exports__
   
   3. NPM
   
-  [1] www.npmjs.com  : public modules
+  [1] www.npmjs.com  : public packages
   
   [2] usage :
   
