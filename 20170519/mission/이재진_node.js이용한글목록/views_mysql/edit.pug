@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+    body
+        h1
+            a(href='/topic') Server Side JavaScript
+        ul
+            each topic in topics
+                li
+                    a(href='/topic/'+topic.id)= topic.title
+        artcle
+            form(action='/topic/'+topic.id+'/edit' method='post')
+                p
+                    input(type='text' name='title' value=topic.title placeholder='title')
+                p
+                    textarea(name='description' placeholder='description')
+                        =topic.description
+                p
+                    input(type='text' name='author' value=topic.author placeholder='author')
+                p
+                    input(type='submit')
+        ul
+            li
+                a(href='/topic/add') add
