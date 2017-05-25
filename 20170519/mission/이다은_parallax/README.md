@@ -9,5 +9,4 @@
 온라인 접속 가능 URL<br>
 https://daeun1012.github.io/mission2/
 
-> 출처 <br>
-> http://thewaterbear.com/pure-css-landscape-parallax/
+> 출처 : http://thewaterbear.com/pure-css-landscape-parallax/
