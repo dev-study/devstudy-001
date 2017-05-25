@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      img{
+        height: 100px;
+        width: 100px;
+      }
+      #b1{
+        position: absolute;
+        top:  100px;
+        left: 1000px;
+      }
+      #b2{
+        position: absolute;
+        top:  250px;
+        left: 130px;
+      }
+      #b3{
+        position: absolute;
+        top:  500px;
+        left: 400px;
+      }
+    </style>
+  </head>
+  <body style="background-color:blue;">
+    <center>
+      <h1>당구공 클릭게임!</h1>
+      <input id="start" type="button" name="" value="게임 시작">
+      <input id="stop" type="button" name="" value="게임 정지">
+    </center>
+
+      <img  class="img1" id="b1" src="redball.jpeg" alt="빨간공">
+      <img  class="img2" id="b2" src="whiteball.jpg" alt="하얀공">
+      <img  class="img3" id="b3" src="yellowball.jpg" alt="노란공">
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+      <script type="text/javascript">
+        function check(){
+          if($("#b1").prop("class") == "clear" && $("#b2").prop("class") == "clear" && $("#b3").prop("class") == "clear"){
+            alert("미션 클리어!");
+          }
+        }
+        function loop1(){
+          $("#b1").animate({"left":"+=275px","top":"+=250px"},400)
+                  .animate({"left":"-=500px","top":"-=100px"},300)
+                  .animate({"left":"+=375px","top":"-=100px"},200)
+                  .animate({"left":"-=150px","top":"-=50px"},100,loop1);
+        }
+        function loop2(){
+          $("#b2").animate({"left":"+=350px","top":"+=220px"},700)
+                  .animate({"left":"-=100px","top":"-=120px"},300)
+                  .animate({"left":"+=100px","top":"-=130px"},500)
+                  .animate({"left":"-=350px","top":"+=30px"},700,loop2);
+        }
+        function loop3(){
+          $("#b3").animate({"left":"-=150px","top":"-=250px"},200)
+                  .animate({"left":"+=550px","top":"+=100px"},300)
+                  .animate({"left":"+=52px","top":"-=100px"},500)
+                  .animate({"left":"-=452px","top":"+=250px"},400,loop3);
+        }
+        $("#start").click(function(){
+                $("#stop").attr('class',"true");
+                loop1();
+                loop2();
+                loop3();
+                $("#b1").click(function(){
+                  if($("#stop").attr('class')=="true"){
+                    $("#b1").clearQueue().stop().fadeOut("slow").attr("class","clear");
+                    check();
+                  }
+                });
+                $("#b2").click(function(){
+                  if($("#stop").attr('class')=="true"){
+                    $("#b2").clearQueue().stop().fadeOut("slow").attr("class","clear");
+                    check();
+                  }
+                });
+                $("#b3").click(function(){
+                  if($("#stop").attr('class')=="true"){
+                    $("#b3").clearQueue().stop().fadeOut("slow").attr("class","clear");
+                    check();
+                }
+                });
+              });
+        $("#stop").click(function(){
+                $("#stop").attr('class',"false");
+                $("#b1").clearQueue().stop().offset({top: 100, left: 1000});
+                $("#b2").clearQueue().stop().offset({top: 250, left: 130});
+                $("#b3").clearQueue().stop().offset({top: 500, left: 400});
+              });
+
+      </script>
+  </body>
+</html>
