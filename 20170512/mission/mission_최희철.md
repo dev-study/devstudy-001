@@ -1,0 +1,1 @@
+[블로그](https://chori84.github.io/)로 연결하겠습니다.

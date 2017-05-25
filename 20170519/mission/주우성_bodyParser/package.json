@@ -1,0 +1,20 @@
+{
+  "name": "body-parser-practice",
+  "version": "1.0.0",
+  "description": "express/body-parser practice",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "body-parser"
+  ],
+  "author": "woosungchu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  }
+}

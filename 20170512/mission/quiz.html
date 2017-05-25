@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+    div#test{
+      border:#000 1px solid;
+      padding:10px 40px 40px 40px;
+      background-color: skyblue;
+    }
+    #picture{
+      width: 100px;
+      border-radius: 50%;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+    }
+    </style>
+    <script>
+    var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+    var questions = [
+        [ "저는 왜 코딩을 배우고 있을까요?", "심심해서", "허세 좀 부리려고", "먹고 살기 위해", "PC방 차리려고", "C" ],
+        [ "저는 어쩌다가 다리가 부러졌을까요?", "오락실 싸커킥 기계를 힘껏 차다가", "지하철 계단에서 넘어져서", "농구하다가 헛디뎌서", "락페스티벌에서 춤추고 놀다가 빗길에 미끄러져서", "C" ],
+        [ "제가 가장 사고 싶은 물건을 무엇일까요?", "Vespa 스쿠터", "맥북 프로", "에어조던 1 검빨", "HDMI 케이블", "A" ],
+        [ "제가 요새 가장 하고 싶은 것은 무엇일까요?", "1 Mile Run", "지하철 타고 출퇴근하기", "해커톤 나가보기", "태국가서 일해보기", "B" ],
+        [ "제가 최근 가장 스트레스 받는 것은 무엇일까요?", "개발 스터디 개인 과제", "개발 스터디 팀 과제", "택시비 나가는 거", "MVP 개발 빨리 해야 하는데...", "D" ],
+        [ "제가 매일 오후 6시즘 하는 생각은 무엇일까요?", "아 오늘 하루 참 뿌듯하다", "이런 제엔장 뭐 한 것도 없는데 벌써?!", "우와 오늘 저녁에도 신나게 코딩 공부를 해볼까?!", "아 드디어 오늘 하루도 끝이다. 시간 드럽게 안가네", "B" ],
+        [ "제가 밤에 자기 전에 가장 마지막으로 하는 것은 무엇일까요?", "마음의 양식 독서", "블루투스 스피커로 노래듣기", "페이스북 끄적끄적", "이미 졸고 있다", "C" ],
+        [ "제가 스터디에서 바라는 점은 무엇일까요?", "무엇을 모르는지 아는 상태가 되기", "개발자 커리어의 시작", "동업할 개발자 찾기", "나보다 개발도 잘하고 얼굴도 예쁜 여자사람친구 사귀기", "A" ]
+    ];
+
+    function _(x){
+      return document.getElementById(x);
+    }
+
+    function renderQuestion () {
+      test = _("test");
+      if(pos >= questions.length){
+          test.innerHTML = "<h2>총 "+questions.length+" 문제 중 "+correct+"개 맞추셨습니다 ^_^</h2>"
+          test.innerHTML += "<h3>퀴즈 정답 공개!!!</h3><br>"
+          test.innerHTML += "Q1. 저는 왜 코딩을 배우고 있을까요? 먹고 살기 위해<br>"
+          test.innerHTML += "Q2. 저는 어쩌다가 다리가 부러졌을까요? 농구하다가 헛디뎌서<br>"
+          test.innerHTML += "Q3. 제가 가장 사고 싶은 물건을 무엇일까요? Vespa 스쿠터<br>"
+          test.innerHTML += "Q4. 제가 요새 가장 하고 싶은 것은 무엇일까요? 지하철 타고 출퇴근하기<br>"
+          test.innerHTML += "Q5. 제가 최근 가장 스트레스 받는 것은 무엇일까요? MVP 개발 빨리 해야 하는데...<br>"
+          test.innerHTML += "Q6. 제가 매일 오후 6시즘 하는 생각은 무엇일까요? 이런 제엔장 뭐 한 것도 없는데 벌써?!<br>"
+          test.innerHTML += "Q7. 제가 밤에 자기 전에 가장 마지막으로 하는 것은 무엇일까요? 페이스북 끄적끄적<br>"
+          test.innerHTML += "Q8. 제가 스터디에서 바라는 점은 무엇일까요? 무엇을 모르는지 아는 상태가 되기<br>"
+          _("test_status").innerHTML = "퀴즈 끝!";
+          pos = 0;
+          correct = 0;
+          return false;
+      }
+
+      _("test_status").innerHTML = "Question " +  (pos+1) +  " of "  +questions.length;
+      question = questions[pos][0];
+      chA = questions[pos][1];
+      chB = questions[pos][2];
+      chC = questions[pos][3];
+      chD = questions[pos][4];
+      test.innerHTML = "<h3>"+question+"</h3>";
+      test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+      test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+      test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br>";
+      test.innerHTML += "<input type='radio' name='choices' value='D'> "+chD+"<br><br>";
+      test.innerHTML += "<button onclick='checkAnswer()'>별로 관심없지만 어쨌든 확인</button>";
+    }
+function checkAnswer(){
+  choices = document.getElementsByName("choices");
+  for(var i=0; i<choices.length; i++){
+    if(choices[i].checked){
+      choice = choices[i].value;
+    }
+  }
+  if(choice == questions[pos][5]){
+      correct++;
+  } else {
+    alert("wrong!");
+  }
+  pos++;
+  renderQuestion();
+}
+window.addEventListener("load", renderQuestion, false);
+    </script>
+  </head>
+  <body>
+    <h1>나를 맞춰봐!!!</h1>
+    <img id="picture" src="images/selfie2.jpeg">
+    <h2 id="test_status"></h2>
+    <div id="test"></div>
+
+  </body>
+</html>
