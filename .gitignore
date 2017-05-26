@@ -1,4 +1,5 @@
 20170526/AngularJS/.idea
 20170526/TypeScript/.idea
 .idea
-.idea/*
+.idea/vcs.xml
+.idea/dictionaries/boyeon.xml
