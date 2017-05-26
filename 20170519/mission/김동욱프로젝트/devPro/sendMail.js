@@ -1,61 +1,62 @@
-var _jade = require('jade');
-var fs = require('fs');
-var smtpPool = require('nodemailer-smtp-pool');
+var app = require('express')(),
+    mailer = require('express-mailer');
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: false}));
 
-var nodemailer = require("nodemailer");
+app.listen(3000, function(){
+    console.log('Conneted 3000 port!');
+});
 
-var FROM_ADDRESS = 'foo@bar.com';
-var TO_ADDRESS = 'test@test.com';
+app.set('views', './views_file');
+app.set('view engine', 'jade');
 
-// create reusable transport method (opens pool of SMTP connections)
-var smtpTransport = nodemailer.createTransport(smtpPool({
-    service: "Gmail",
-    auth: {
-        user: "kdwman3477",
-        pass: "kk672600"
+app.get('/send', function(req, res){
+  res.render('email');
+})
+
+mailer.extend(app, {
+  from: 'kdwman3477@gmail',
+  host: 'smtp.gmail.com', // hostname
+  secureConnection: true, // use SSL
+  port: 465, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: 'kdwman3477@gmail.com',
+    pass: '*******'
+  }
+});
+
+app.post('/send_email', function(req, res, next){
+
+  app.mailer.send('contact', {
+    from: req.body.sender,
+    to: req.body.receiver,
+    subject: req.body.subject,
+    description: req.body.description
+  }, function (err) {
+    if (err) {
+      // handle error
+      console.log(err);
+      res.send('There was an error sending the email');
+      return;
     }
-}));
-
-var sendMail = function(toAddress, subject, content, next){
-  var mailOptions = {
-    from: "SENDERS NAME <" + FROM_ADDRESS + ">",
-    to: toAddress,
-    replyTo: fromAddress,
-    subject: subject,
-    html: content
-  };
-
-  smtpTransport.sendMail(mailOptions, next);
-};
-
-exports.index = function(req, res){
-  // res.render('index', { title: 'Express' });
-
-  // specify jade template to load
-  var template = process.cwd() + '/views/index.jade';
-
-  // get template from file system
-  fs.readFile(template, 'utf8', function(err, file){
-    if(err){
-      //handle errors
-      console.log('ERROR!');
-      return res.send('ERROR!');
-    }
-    else {
-      //compile jade template into function
-      var compiledTmpl = _jade.compile(file, {filename: template});
-      // set context to be used in template
-      var context = {title: 'Express'};
-      // get html back as a string with the context applied;
-      var html = compiledTmpl(context);
-
-      sendMail(TO_ADDRESS, 'test', html, function(err, response){
-        if(err){
-          console.log('ERROR!');
-          return res.send('ERROR');
-        }
-        res.send("Email sent!");
-      });
-    }
+    res.send('Email Sent');
   });
-};
+});
+
+// app.get('/', function (req, res, next) {
+//
+//   app.mailer.send('email', {
+//     to: 'kdwman3477@gmail.com', // REQUIRED. This can be a comma delimited string just like a normal email to field.
+//     subject: 'Test Email', // REQUIRED.
+//     otherProperty: 'Other Property' // All additional properties are also passed to the template as local variables.
+//   }, function (err) {
+//     if (err) {
+//       // handle error
+//       console.log(err);
+//       res.send('There was an error sending the email');
+//       return;
+//     }
+//     res.send('Email Sent');
+//   });
+// });
