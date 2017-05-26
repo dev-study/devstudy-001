@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.box.move {
+    z-index: 9999;
+}
+.box {
+    background:#fff;
+    width:100px;
+    height:100px;
+    box-shadow:0 10px 10px rgba(0,0,0,.34);
+    cursor: pointer;
+    border:10px solid #ddd;
+    position: absolute;
+    left:0;
+    top:0;
+}
