@@ -1,0 +1,22 @@
+DOCTYPE html
+  html
+    head
+      meta(charset='utf-8')
+    div(style='width:40%;')
+      form(action='send_email', method='post')
+        div
+          span
+            from
+          input(type='text' name='sender' placeholder='from')
+        div
+          span
+            to
+          input(type='text' name='receiver' placeholder='to')
+        div
+          span
+            제목
+          input(type='text' name='subject' placeholder='제목')
+        div
+          textarea(name='description' placeholder='내용')
+        div
+          input(type='submit' value='보내기')
