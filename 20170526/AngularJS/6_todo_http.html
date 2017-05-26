@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+<meta charset="UTF-8">
+<title>할 일 목록</title>
+<style>
+body {
+	margin:0;
+}
+	#wrap {
+	width:1000px;margin:auto;border:1px solid #424242;}
+	
+	#header {
+	width:1000px;
+	background:#00BCD4;
+	border-bottom:1px solid #424242;
+		border-top:1px solid #00B8D4;
+	}
+	
+	#header ul {
+		margin:0;
+		padding:0;
+		list-style: none;
+		overflow: hidden;
+	}
+	
+	#header li {
+		float:left;
+		padding:5px 10px;
+	}
+	#content {
+		min-height:500px;
+		padding:20px;
+	}
+	#footer {
+	height:100px;
+	line-height:100px;
+	text-align:center;
+		background:#00BCD4;
+	border-top:1px solid #424242}
+	
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<h1>할일앱</h1>
+		<ul>
+			<li><a href="#todos">할일목록</a>
+			<li><a href="#write">할일쓰기</a>
+		</ul>
+	</div>
+	<div id="content">
+		<ng-view></ng-view>
+	</div>
+	<div id="footer">&copy; 2017 jat.com</div>
+</div>
+<!-- import -->
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script>
+
+	// $route를 이용한 단일페이지 웹 어플리케이션 개발
+
+    // CRUD
+    // C(create : INSERT구문) : POST
+    // R(read : SELECT구문) : GET
+    // U(update : UPDATE구문) : PUT
+    // D(delete : DELETE구문) : DELETE
+
+	// ngRoute 모듈 사용
+    var app = angular.module("todoApp",["ngRoute"]);
+
+	// $route 서비스
+    // 현재 브라우저 URL에 해당하는 화면과 컨트롤러를 연결 하는데 사용된다.
+    // Module의 config API를 사용하면 서비스 제공자 provider에 접근할 수 있다. 여기선 $route 서비스 제공자를 인자로 받아온다.
+	app.config(["$routeProvider","$locationProvider",
+		function ($routeProvider,$locationProvider) {
+
+			$locationProvider.hashPrefix("");//#! -> #
+
+            // $routeProvider의 when 메소드를 이용하면 특정 URL에 해당하는 라우트를 설정한다.
+			// 이때 라우트 설정 객체를 전달하는데 <ng-view> 태그에 삽입할 탬플릿에 해당하는 url을 설정객체의 templateUrl 속성으로 정의한다.
+			$routeProvider.when("/todos",{
+				templateUrl:"views/todoList.html",
+				controller:"listCtrl"
+			});//when() end
+
+			$routeProvider.when("/write",{
+				templateUrl:"views/write.html",
+				controller:"writeCtrl"
+			});//when() end
+
+            // otherwise 메소드를 통하여 브라우저의 URL이 $routeProivder에서 정의되지 않은 URL일 경우에 해당하는 설정을 할 수 있다.
+			// 여기선 ‘/todos’으로 이동시키고 있다.
+			$routeProvider.otherwise({
+				redirectTo:"/todos"
+			});//otherwise() end
+
+    	}
+    ])//config() end
+
+
+    // 할일 쓰기 화면의 컨트롤러를 정의한다.
+	// 데이터를 비동기로 서버로부터 읽어와 동적으로 화면을 구성
+	// $http : Ajax 기능을 위해 제이쿼리처럼 XMLHttpRequest를 손쉽게 사용할 수 있게 하는 서비스
+    app.controller("writeCtrl",[
+	    "$scope","$http","$location",
+		function ($scope,$http,$location) {
+
+			//할 일 모델(M) 정의
+			$scope.todo = {title:"",end:false};
+
+			//할 일을 쓰는 이벤트 핸들러
+			$scope.writeTodo = function (todo) {
+
+                // $ http서비스를 요청 설정 객체와 함께 호출한다.
+				// 요청 설정 객체에 method 속성에는 GET, POST, DELET, PUT과 같은 HTTP 메소드를 문자열값으로 정하고 url 속성으로 전송할 대상 URL을 문자열값으로 줄 수 있다.
+		        var promise = $http({
+					url:"https://api.mlab.com/api/1/databases/jat/collections/todos",
+					method:"POST",//입력
+					params:{apiKey:"5x9la05Y3Ppss-2jA-Mqs_cPddaCVK99"},
+					data:todo
+				});//promise객체
+
+                promise.then(function () {
+					// todos로 이동($location)
+					$location.path("/todos");
+				},function () {
+					alert("서버 점검중입니다.^-^");
+				}); // then() end
+
+        	}//writeTodo() end
+		}
+	]);//writeCtrl() end
+
+	// 리스트 목록 화면의 사용할 컨트롤러 정의
+	app.controller("listCtrl",["$scope","$http",
+		function ($scope,$http) {
+
+			// 힐 일 수정 이벤트 핸들러
+			$scope.updateTodo = function (todo) {
+
+			    //수정할때 로딩이미지 보이기
+				$scope.loading = true;
+
+				var promise = $http({
+					url:"https://api.mlab.com/api/1/databases/jat/collections/todos/"+todo._id.$oid,
+					params:{apiKey:"5x9la05Y3Ppss-2jA-Mqs_cPddaCVK99"},
+					method:"PUT",//수정(PUT)
+					data:todo
+				});
+
+				promise.then(function () {
+					getTodos();//성공했으니까 갱신
+				},function () {
+					alert("서버 점검중입니다.ㅜ-ㅜ");
+				});//then() end
+
+			}//updateTodo() end
+
+			// 할 일 삭제하는 이벤트 핸들러
+			$scope.deleteTodo = function(todo) {
+
+				//삭제할때 로딩이미지 보이기
+				$scope.loading = true;
+
+				var promise = $http({
+					url:"https://api.mlab.com/api/1/databases/jat/collections/todos/"+todo._id.$oid,
+					params:{apiKey:"5x9la05Y3Ppss-2jA-Mqs_cPddaCVK99"},
+					method:"delete"	// 삭제
+				});
+
+				promise.then(function () {
+					getTodos();//성공했으니까 갱신
+				},function () {
+					alert("서버 점검중입니다.ㅜ-ㅜ");
+				});//then() end
+
+			}//deleteTodo() end
+
+
+			getTodos();
+
+			// 할 일 조회
+			function getTodos() {
+
+				$scope.loading = "true";//로딩이미지를 보여주기
+
+				var promise = $http({
+					url:"https://api.mlab.com/api/1/databases/jat/collections/todos",
+					method:"get",
+					params:{apiKey:"5x9la05Y3Ppss-2jA-Mqs_cPddaCVK99"}
+				});
+
+				promise.then(function (response) {
+
+				    // Model
+					$scope.todos = response.data;
+
+					// 로딩이미지 숨김
+					$scope.loading = false;
+
+				},function () {
+					alert("에러");
+				});//then() end
+
+
+			}//getTodos() end
+
+    }]);//listCtrl() end
+
+
+</script>
+</body>
+</html>

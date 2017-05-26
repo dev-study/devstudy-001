@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directiveApp">
+<head>
+    <meta charset="UTF-8">
+    <title>my customed directive</title>
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-controller="Ctrl">
+
+<ex info="person"></ex>
+
+<script>
+
+    var app = angular.module('directiveApp', []);
+
+    app.controller('Ctrl', ["$scope", function($scope) {
+            $scope.person = {
+                name: 'nextreeMember',
+                address: 'Gasan'
+            };
+        }]);
+
+
+    app.directive('ex', function() {
+
+            //alert(person);
+            //alert(info);
+
+            return {
+                restrict: 'E',
+                info: "=",      // =, @
+                template: '<li>Name: {{person.name}} </br> Address: {{person.address}}</li>'
+            };
+        });
+</script>
+</body>
+</html>

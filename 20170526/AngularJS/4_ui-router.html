@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app="uiRouterApp">
+<head>
+<meta charset="UTF-8">
+<title>ui router 예제</title>
+<style>
+	body {
+		margin:0;
+	}
+	#wrap {
+	width:1000px;margin:auto;border:1px solid #424242;
+	}
+	
+	#header {
+	width:1000px;
+	background:#00BCD4;
+	border-bottom:1px solid #424242;
+		border-top:1px solid #00B8D4;
+	}
+	
+	#header ul {
+		margin:0;
+		padding:0;
+		list-style: none;
+		overflow: hidden;
+	}
+	
+	#header li {
+		float:left;
+		padding:5px 10px;
+	}
+	#content {
+		min-height:500px;
+		padding:20px;
+	}
+	#footer {
+	height:100px;
+	line-height:100px;
+	text-align:center;
+		background:#00BCD4;
+	border-top:1px solid #424242}
+	
+</style>
+</head>
+<body>
+<div ui-view id="wrap"></div>
+<script src="js/angular.min.js"></script>
+<!-- ui router  -->
+<script src="js/angular-ui-router.min.js"></script>
+<script>
+
+	var app = angular.module("uiRouterApp",["ui.router"]);
+
+	app.config(["$stateProvider","$urlRouterProvider","$locationProvider",
+        function ($stateProvider,$urlRouterProvider,$locationProvider) {
+            $locationProvider.hashPrefix('');
+
+        //state(상태), url(주소)
+        $stateProvider.state("todo",{
+            url:"/todo",
+            abstract:true,//추상
+            templateUrl:"ui-router/template.html"
+        });
+
+        $stateProvider.state("todo.list",{
+            url:"/list",// todo/list
+            views:{
+                headerView:{
+                    templateUrl:"ui-router/header.html"
+                },
+                contentView:{
+                    templateUrl:"ui-router/content.html"
+                },
+                footerView:{
+                    templateUrl:"ui-router/footer.html"
+                }
+            }
+        });
+
+        $stateProvider.state("todo.search",{
+            url:"/search",// todo/list
+            views:{
+                headerView:{
+                    templateUrl:"ui-router/header.html"
+                },
+                contentView:{
+                    templateUrl:"ui-router/search.html"
+                },
+                footerView:{
+                    template:"&copy;여기는 검색페이지"
+                }
+            }
+        });
+
+        $stateProvider.state("todo.write",{
+            url:"/write",// todo/list
+			views:{
+                headerView:{
+                    templateUrl:"ui-router/header.html"
+
+				},
+				contentView:{
+                    templateUrl:"ui-router/write.html"
+				},
+				footerView:{
+                    template:"&copy;여기는 쓰기페이지"
+				}
+			}
+		});
+
+        $urlRouterProvider.otherwise("/todo/list");
+
+    }]);
+
+</script>
+</body>
+</html>
