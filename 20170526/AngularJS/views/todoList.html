@@ -1,0 +1,16 @@
+<div ng-hide="loading">
+<h2>할 일 목록</h2>
+<ul>
+    <li ng-repeat="todo in todos">
+        <label>
+            <input type="checkbox"
+                   ng-change="updateTodo(todo)"
+                   ng-model="todo.end"/>
+            {{todo.title}}
+        </label>
+        <button ng-click="deleteTodo(todo)">삭제</button>
+    </li>
+</ul>
+<a href="#write">할 일 쓰기</a>
+</div>
+<img src="img/loader.gif" ng-show="loading"/>

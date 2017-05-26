@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular.min.js"></script>
+    <link rel="stylesheet" href="css/angular-canvas.box.css">
+</head>
+<body ng-controller="ctrl">
+<script>
+    var app = angular.module("myApp",[]);
+
+
+    app.controller("ctrl", ["$scope", function ($scope) {
+        $scope.dataList = [{ x:10, y:30, w:200, h:300, rx:100, ry:20, rw:30, rh:100, color:"#008232"},
+            { x:520, y:300, w:200, h:300, rx:100, ry:120, rw:20, rh:30, color:"red"},
+            { x:430, y:20, w:200, h:300, rx:100, ry:120, rw:120, rh:100, color:"black"},
+            { x:30, y:220, w:200, h:300, rx:100, ry:120, rw:100, rh:100, color:"yellow"},
+            { x:950, y:10, w:200, h:300, rx:100, ry:120, rw:100, rh:100, color:"blue"}];
+    }]);
+
+    app.directive("canvasBox", [function () {
+        //console.log(data);
+
+        return {
+            restrict: "E",
+            replace:true,
+            template: "<div class='box'><canvas width='100' height='100'></canvas></div>",
+//            compile: function (scope, element) {
+//                // compile and link use only one;
+//                // 디렉티브가 만들어질떄
+//                alert('compile');
+//                console.log(scope);
+//                console.log(element);
+//            },
+            link: function (scope, element, attr) {
+                // dom is making with data;
+                // after compile and then add data to dom
+//                console.log(scope.data);
+//                console.log(element);
+//                console.log(attr);
+//                alert('link');
+                element.css({width: scope.data.w +"px", height: scope.data.h+"px", left: scope.data.x+"px", top: scope.data.y+"px"});
+                var $canvas = element.find("canvas");
+                console.log(canvas);
+
+                // 순수 자바스크립트 객체
+                var canvas = $canvas[0];
+                canvas.width = scope.data.w;
+                canvas.height = scope.data.h;
+
+                // 붓객체
+                var ctx = canvas.getContext('2d');
+                ctx.fillStyle = scope.data.color;
+                ctx.fillRect(scope.data.rw,scope.data.rh,scope.data.rx,scope.data.ry);
+            }
+       };
+
+
+    }]);
+
+
+</script>
+<!--<div class="box">-->
+    <!--<canvas width="100" height="100"></canvas>-->
+<!--</div>-->
+<canvas-box ng-repeat="data in dataList"></canvas-box>
+
+</body>
+</html>

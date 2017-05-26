@@ -1,0 +1,23 @@
+ @font-face {
+     font-family: 'Kakao';
+     src: url(../fonts/KakaoMoblieLight.eot?iefix);
+     src: local(※), url(../fonts/KakaoMoblieLight.woff) format("woff"), url(../fonts/KakaoMoblieLight.woff2) format("woff2");
+     font-style: normal;
+     font-weight: 200
+ }
+ 
+ @font-face {
+     font-family: 'Kakao';
+     src: url(../fonts/KakaoMoblieRegular.eot?iefix);
+     src: local(※), url(../fonts/KakaoMoblieRegular.woff) format("woff"), url(../fonts/KakaoMoblieRegular.woff2) format("woff2");
+     font-style: normal;
+     font-weight: 500;
+ }
+ 
+ @font-face {
+     font-family: 'Kakao';
+     src: url(../fonts/KakaoMoblieBold.eot?iefix);
+     src: local(※), url(../fonts/KakaoMoblieBold.woff) format("woff"), url(../fonts/KakaoMoblieBold.woff2) format("woff2");
+     font-style: normal;
+     font-weight: 900
+ }

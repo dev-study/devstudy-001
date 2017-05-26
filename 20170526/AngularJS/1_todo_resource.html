@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+<meta charset="UTF-8">
+<title>할일 목록</title>
+<style>
+body {
+	margin:0;
+}
+	#wrap {
+	width:1000px;margin:auto;border:1px solid #424242;}
+	
+	#header {
+	width:1000px;
+	background:#00BCD4;
+	border-bottom:1px solid #424242;
+		border-top:1px solid #00B8D4;
+	}
+	
+	#header ul {
+		margin:0;
+		padding:0;
+		list-style: none;
+		overflow: hidden;
+	}
+	
+	#header li {
+		float:left;
+		padding:5px 10px;
+	}
+	#content {
+		min-height:500px;
+		padding:20px;
+	}
+	#footer {
+	height:100px;
+	line-height:100px;
+	text-align:center;
+		background:#00BCD4;
+	border-top:1px solid #424242}
+	
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="header">
+		<h1>할일앱</h1>
+		<ul>
+			<li><a href="#todos">할일목록</a>
+			<li><a href="#write">할일쓰기</a>
+		</ul>
+	</div>
+	<div id="content">
+		<ng-view></ng-view>
+	</div>
+	<div id="footer">&copy; 2017 jat.com</div>
+</div>
+<!-- import -->
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/angular-resource.min.js"></script>
+<script>
+
+    //CRUD
+    //C(create : INSERT구문) : POST
+    //R(read : SELECT구문) : GET
+    //U(update : UPDATE구문) : PUT
+    //D(delete : DELETE구문) : DELETE
+
+	var app = angular.module("todoApp",["ngRoute", "ngResource"]);
+
+	// service :
+	// $resource : restful에 특화된 ajax
+
+	// 의존성 주입
+	app.service("Todo", ["$resource",function ($resource) {
+
+		var url = "https://api.mlab.com/api/1/databases/jat/collections/todos/:id";
+		return $resource(url, {
+            apiKey:"5x9la05Y3Ppss-2jA-Mqs_cPddaCVK99",
+			id:"@_id.$oid"	// @: 객체
+		}, {
+		    update:{method: "PUT"}
+		});
+    }]); // service() end
+
+
+    // router 설정
+    // router : control & view 연결
+    app.config(["$routeProvider","$locationProvider",
+        function ($routeProvider,$locationProvider) {
+
+            $locationProvider.hashPrefix("");//#! -> #
+
+            $routeProvider.when("/todos",{
+                templateUrl:"views/todoList.html",
+                controller:"listCtrl"
+            });//when() end
+
+			$routeProvider.otherwise({
+				redirectTo:"/todos"
+			});
+
+			$routeProvider.when("/write", {
+				templateUrl: "views/write.html",
+				controller: "writeCtrl"
+			});
+
+    }]);
+
+    //
+	app.controller("writeCtrl",[
+	    "$scope","$http","$location", "Todo",
+		function ($scope,$http,$location, Todo) {
+			// Model : 할 일 (todo)
+			$scope.todo = {title:"",end:false};
+
+			// event handler : 할 일을 쓰기
+			$scope.writeTodo = function (todo) {
+                todo = new Todo(todo);
+                todo.$save(function () {
+                    alert('성공');
+                })
+            }
+        }]);
+
+	// third parameter : Todo
+	app.controller("listCtrl",[
+	    "$scope","$http", "Todo",
+		function ($scope,$http,Todo) {
+
+            // event handler : 할 일을 수정하기
+			$scope.updateTodo = function (todo) {
+
+			}
+
+			// event handler : 할 일을 삭제
+			$scope.deleteTodo = function(todo) {
+				todo.$delete(function () {
+					getTodos();
+				})
+			}
+
+		getTodos();//할 일 목록을 불러오기
+
+	    //mlab에 있는 todos를 ajax로 얻어오는 메서드
+		function getTodos() {
+
+		    Todo.query(function (data) {
+				$scope.todos = data;
+				console.log($scope.todos);
+            }, function () {
+				
+            });
+
+            $scope.loading = "true";//로딩이미지를 보여주기
+
+			var promise = $http({
+				url:"https://api.mlab.com/api/1/databases/jat/collections/todos",
+				method:"get",
+				params:{apiKey:"5x9la05Y3Ppss-2jA-Mqs_cPddaCVK99"}
+			});
+
+			promise.then(function (response) {
+
+				$scope.todos = response.data;
+				//로딩이미지 숨김
+				$scope.loading = false;
+
+            },function () {
+				alert("에러");
+            });
+
+		}
+    }]);
+
+</script>
+</body>
+</html>
