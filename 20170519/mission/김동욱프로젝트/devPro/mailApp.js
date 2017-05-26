@@ -52,7 +52,7 @@ var smtpTransport = nodemailer.createTransport(smtpPool({
     port: '465',
     auth: {
         user: 'kdwman3477',
-        pass: 'kk672600'
+        pass: '********'
     },
     tls: {
       rejectUnauthorize: false
