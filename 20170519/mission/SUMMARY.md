@@ -1,3 +1,7 @@
+Let's enjoy together with DEVSTUDY
+
+![활동사진](https://github.com/dev-study/devstudy-2017-first/tree/master/20170519/mission/images/photo.jpeg)
+
 # 2주차 미션, 미니웹프로젝트
 
 ### 민수
