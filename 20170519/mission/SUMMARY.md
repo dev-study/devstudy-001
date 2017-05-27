@@ -1,4 +1,4 @@
-Let's enjoy together with DEVSTUDY
+# Let's enjoy together with DEVSTUDY
 
 ![활동사진](https://github.com/dev-study/devstudy-2017-first/blob/master/20170519/images/photo.jpeg)
 
