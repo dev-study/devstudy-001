@@ -211,7 +211,10 @@ kwoninho, alan
 ```
 
 ### 스타트업에 관심있으신가요?
+![플랜](https://github.com/dev-study/devstudy-2017-first/blob/master/images/survey01.png)
 
 ### 한국인공지능협회 운영 활동에 관심있으신가요?
+![플랜](https://github.com/dev-study/devstudy-2017-first/blob/master/images/survey02.png)
 
 ### 다음 단계에서도 현재 팀을 유지하고 싶으신가요?
+![플랜](https://github.com/dev-study/devstudy-2017-first/blob/master/images/survey03.png)
