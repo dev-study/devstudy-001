@@ -210,11 +210,8 @@ kwoninho, alan
 2주에 한 번씩 모이면 좋을 것 같습니다. 팀 단위로 따로 모이는 시간적 여유를 주시면 좋을 것 같고, 팀이 한 달에 한 번씩 바뀌는 것보다 좀 오랫동안 지속되었으면 좋겠습니다.
 ```
 
-### 스타트업에 관심있으신가요?
 ![플랜](https://github.com/dev-study/devstudy-2017-first/blob/master/images/survey01.png)
 
-### 한국인공지능협회 운영 활동에 관심있으신가요?
 ![플랜](https://github.com/dev-study/devstudy-2017-first/blob/master/images/survey02.png)
 
-### 다음 단계에서도 현재 팀을 유지하고 싶으신가요?
 ![플랜](https://github.com/dev-study/devstudy-2017-first/blob/master/images/survey03.png)
